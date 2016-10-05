@@ -1,3 +1,3 @@
 # Linux-Kernel-Workshop
 
-This repository contains details about my Linux-Kernel workshop.
+This repository contains details about Linux Kernel workshops conducted by me.

@@ -100,7 +100,7 @@ In gmail, go click the gear icon, go to "Settings", go to the tab "Forwarding PO
 
 Then click "I want to set up IMAP". At the bottom of the page, under the paragraph about configuring your mail client, select "Other". Note the outgoing mail server information, and copy it into the .esmtprc file, as shown in the next section.
 
-#**6. Seeting up Vim** [extra]
+#**6. Setting up Vim** [extra]
 
 We need to make sure to enable the C indentation module in our default text editor (vim). Turning on this module will ensure that lines automatically get indented to the right level as you're editing. It saves you from hitting <tab> a lot. You can turn on automatic indentation based on the file type.
 
@@ -115,3 +115,48 @@ set softtabstop=8
 set shiftwidth=8
 set noexpandtab
 ```
+
+#**7. Configuring estmp and mutt** [This can be done during workshop as well]
+
+First, create a .esmtprc file with the right permissions:
+
+> ```
+touch ~/.esmtprc
+chmod g-rwx ~/.esmtprc
+chmod o-rwx ~/.esmtprc
+```
+
+Edit the .esmtprc in your home directory, and add lines like this:
+
+> ```
+identity "my.email@gmail.com"
+hostname smtp.gmail.com:587
+username "my.email@gmail.com"
+password "ThisIsNotARealPassWord"
+starttls required
+```
+
+Next, set up the mail client, mutt, with some defaults, by creating a .muttrc file in your homedirectory:
+
+> ```
+set sendmail="/usr/bin/esmtp"
+set envelope_from=yes
+set from="Your Name <my.email@gmail.com>"
+set use_from=yes
+set edit_headers=yes
+```
+
+#**8. Configuring git** [This can be done during workshop as well]
+
+If you want to use git send-email to send the patches, then you need to do the following settings in your .gitconfig file:
+
+> ```
+[user]
+	email = my.email@gmail.com
+	name = my name
+[sendemail]
+	smtpuser =my.email@gmail.com
+	smtpserver = smtp.googlemail.com
+	smtpencryption = tls
+	smtpserverport = 587
+	suppresscc = self
